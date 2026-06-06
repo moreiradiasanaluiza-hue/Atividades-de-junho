@@ -15,6 +15,7 @@ public static void main(String[] args) {
 		System.out.println("Informe o "+(i+1)+ "° Número: ");
 		vetA[i] =ler.nextInt();
 		vetC[i] =vetA[i];
+		
 	}
 	System.out.println("Valores do Vetor B");
 	for (int i=0; i<5; i++) {

@@ -11,6 +11,7 @@ public static void main(String[] args) {
     int Itens = 0;
     int escolha;
 
+    
     System.out.println(" Bem-vindo à Lanchonete!");
 
     do {
