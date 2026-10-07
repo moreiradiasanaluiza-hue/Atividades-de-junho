@@ -1,19 +1,61 @@
-package JunhoAtvs;
 
-import java.util.Scanner;
 
-public class Atv1_0306 {
-public static void main(String[] args) {
-	int a []=new int [5];
-	Scanner ler = new Scanner (System.in);
-	
-	for (int i=0; i<5; i++) {
-		System.out.println("Informe um Valor "+i+ "...");
-		a[i]= ler.nextInt();
-		
-	}for (int i=0; i<5; i++) {
-		System.out.println(a[i]);
-	}
-	ler.close();
+class ContaBancaria {
+  private numero: string;
+  private saldo: number;
+
+  constructor(numero: string, saldoIn: number) {
+    this.numero = numero;
+    this.saldo = saldoIn;
+  }
+
+  public depositar(valor: number): void {
+    if (valor > 0) {
+      this.saldo += valor;
+      console.log(`Depósito de R$ ${valor.toFixed(2)} realizado com sucesso.`);
+    } else {
+      console.log("Valor de depósito inválido!");
+    }
+  }
+
+  public sacar(valor: number): void {
+    if (valor <= this.saldo) {
+      this.saldo -= valor;
+      console.log(`Saque de R$ ${valor.toFixed(2)} realizado com sucesso.`);
+    } else {
+      console.log("Saldo insuficiente para realizar o saque!");
+    }
+  }
+
+  public getSaldo(): number {
+    return this.saldo;
+  }
+
+  public getNumero(): string {
+    return this.numero;
+  }
 }
-}
+
+const ler = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+const conta = new ContaBancaria("001-X", 500.00); 
+
+console.log("Conta Iniciada");
+console.log(`Número da Conta: ${conta.getNumero()}`);
+console.log(`Saldo Inicial: R$ ${conta.getSaldo().toFixed(2)}\n`);
+
+ler.question("Digite o valor que deseja sacar: ", (valSaq) => {
+  conta.sacar(parseFloat(valSaq));
+  console.log(`Saldo atual após saque: R$ ${conta.getSaldo().toFixed(2)}\n`);
+
+  ler.question("Digite o valor que deseja depositar: ", (valDep) => {
+    conta.depositar(parseFloat(valDep));
+    console.log("\nSaldo Final");
+    console.log(`Conta: ${conta.getNumero()} | Saldo Final: R$ ${conta.getSaldo().toFixed(2)}`);
+    
+    ler.close();
+  });
+});
