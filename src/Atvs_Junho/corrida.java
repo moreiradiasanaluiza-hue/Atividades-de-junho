@@ -1,67 +1,30 @@
-package Atvs_Junho;
+class Produto {
+    private nome: string;
+    private preco: number;
+    private quantidadeEstoque: number;
 
-import java.util.Scanner;
 
-public class corrida {
-public static void main(String[] args) {
+    constructor(nome: string, preco: number, quantidadeEstoque: number) {
+        this.nome = nome;
+        this.preco = preco >= 0 ? preco : 0;
+        this.quantidadeEstoque = quantidadeEstoque >= 0 ? quantidadeEstoque : 0;
+    }
 
-	        Scanner ler =new Scanner(System.in);
-	        
 
-	        int carroA = 0;
-	        int carroB = 0;
-	        int rodada = 1;
+    public exibirDetalhes(): void {
+        console.log(`Produto: ${this.nome} | Preço: R$ ${this.preco.toFixed(2)} | Estoque: ${this.quantidadeEstoque} un.`);
+    }
 
-	        System.out.println("Bem-Vindo !!!");
-	        System.out.println("A corrida termina assim que um dos carros atingir 100 metros.");
-
-	    
-	        do {
-	            System.out.println("RODADA " + rodada);
-	            
-	     
-	            System.out.print("Quantos metros o Carro A percorreu nesta rodada? ");
-	            int avancoA = ler.nextInt();
-	            carroA += avancoA;
-
-	            System.out.print("Quantos metros o Carro B percorreu nesta rodada? ");
-	            int avancoB = ler.nextInt();
-	            carroB += avancoB;
-
-	            System.out.println("Distância atual - Carro A: " + carroA + "| Carro B: " + carroB );
-
-	            
-	            if (carroA < 100 && carroB < 100) {
-	                if (carroA >carroB) {
-	                    System.out.println(" Carro A está na frente!!!");
-	                } else if (carroB > carroA) {
-	                    System.out.println("Carro B está na frente!!!");
-	                } else {
-	                    System.out.println("Os carros estão empatados!!!");
-	                }
-	                
-	            }
-	            
-	            
-	            rodada++;
-
-	        } while (carroA < 100 && carroB < 100);
-
-	      
-	        System.out.println("Fim da Corrida!!!");
-	        System.out.println("Distância Final - Carro A: " + carroA + " | Carro B: " + carroB );
-
-	        if (carroA >= 100 && carroB >= 100) {
-	            System.out.println("🤝 Incrível! Ambos cruzaram a linha de chegada na mesma rodada. EMPATE!");
-	        } else if (carroA >= 100) {
-	        	System.out.println("Vencedor: Carro A ");
-	        
-	        } else {
-	            System.out.println("Vencedor: Carro B");
-	        }
-
-	        ler.close();
-	    }
-
+    public calcTotalEst(): number {
+        return this.preco * this.quantidadeEstoque;
+    }
 }
 
+const prod01 = new Produto("Teclado Mecânico", 250.00, 15);
+const prod02 = new Produto("Mouse Gamer", 120.00, 30);
+
+prod01.exibirDetalhes();
+console.log(`Valor total em estoque (${prod01.getNome?.() || 'Produto'}): R$ ${prod01.calcTotalEst().toFixed(2)}');
+
+prod02.exibirDetalhes();
+console.log(`Valor total em estoque: R$ ${prod02.calcTotalEst().toFixed(2)}`);
